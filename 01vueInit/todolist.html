@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>任天堂明星大乱斗 参战！</title>
+    <script src="http://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                inputValue:'',
+                list: ['林克', '马里奥', '雨宫莲', '贝蕾特']
+            }
+        },
+        methods: {
+            addItem(){
+                this.list.push(this.inputValue);
+                this.inputValue = ''
+            }
+        },
+        template: `<div>
+                        <input v-model="inputValue">
+                        <button @click="addItem">新角色参战</button>
+                        <ui>
+                            <li v-for="(item,index) of list">{{index}}{{item}} 参战</li>
+                        </ui>
+                   </div>`
+    }).mount('#root');
+</script>
+</html>
