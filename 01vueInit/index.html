@@ -6,22 +6,36 @@
     <script src="http://unpkg.com/vue@next"></script>
 </head>
 <body>
-    <div id="root"></div>
+<div id="root"></div>
 </body>
 <script>
     Vue.createApp({
-        data(){
+        data() {
             return {
-                content: 'hello world',
+                show: true,
+                content: '女神异闻录',
+                buttonName:'隐匿'
             }
         },
-        methods:{
-            handleBtnClick(){
+        methods: {
+            handleBtnClick() {
                 this.content = this.content.split('').reverse().join('')
+            },
+            handleBtnHide() {
+                this.show = !this.show;
+                if(this.show){
+                    this.buttonName = '隐匿'
+                }else {
+                    this.buttonName = '显现'
+                }
             }
+
+
         },
         template: `<div>
-                        {{content}}m
+                  <div> <span v-if="show">心之怪盗团 </span>
+                 <button @click="handleBtnHide">{{buttonName}}</button></div>
+                        {{content}}
                    <button @click="handleBtnClick">反转</button>
                    </div>`
     }).mount('#root');
