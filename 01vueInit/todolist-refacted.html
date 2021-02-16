@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        组件化初体验
+    </title>
+    <script src="http://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script>
+    const app =Vue.createApp({
+        data() {
+            return {
+                inputValue:'',
+                list: ['林克', '马里奥', '雨宫莲', '贝蕾特']
+            }
+        },
+        methods: {
+            addItem(){
+                this.list.push(this.inputValue);
+                this.inputValue = ''
+            }
+        },
+        template: `<div>
+                        <input v-model="inputValue">
+                        <button @click="addItem">新角色参战</button>
+                        <ui>
+                            <todo-item v-for="(item,index) of list"
+                            v-bind:content="item"
+                            v-bind:index="index"></todo-item>
+                        </ui>
+                   </div>`
+    })
+
+    app.component('todo-item',{
+        props:['content','index'],
+        template: '<li>{{index}}=={{content}}</li>'
+    })
+
+    app.mount("#root");
+</script>
+</html>
